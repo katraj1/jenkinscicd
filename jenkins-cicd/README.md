@@ -1,25 +1,12 @@
-# Prerequisites
+# Steps to accomplish this project
 #
-- JDK 11
-- Maven 3 or later
-- MySQL 5.6 or later
+- Using the terraform file build the base infrastructure of 4 servers
+- Manually configure the Jenkins, Sonarqube, Nexus repo and Tomcat server
+- Intergrate CI/CD using Jenkins Pipeline and deploy it in Tomcat server
 
 # Technologies 
-- Spring MVC
-- Spring Security
-- Spring Data JPA
+- Github, Github webhook
+- Jenkins pipeline , Declarative script
 - Maven
-- JSP
-- MySQL
-# Database
-Here,we used Mysql DB 
-MSQL DB Installation Steps for Linux ubuntu 14.04:
-- $ sudo apt-get update
-- $ sudo apt-get install mysql-server
-
-Then look for the file :
-- /src/main/resources/accountsdb
-- accountsdb.sql file is a mysql dump file.we have to import this dump to mysql db server
-- > mysql -u <user_name> -p accounts < accountsdb.sql
-
-
+- SonarQube
+- Nexus repo
