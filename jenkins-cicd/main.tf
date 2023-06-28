@@ -6,7 +6,7 @@ provider "aws" {
 resource "aws_instance" "jenkins-server" {
   ami                    = "ami-057752b3f1d6c4d6c" # Replace with the desired Amazon Linux AMI ID
   instance_type          = "t2.medium"
-  key_name               = "newone.pem" # Replace with your existing key pair name
+  key_name               = "newone" # Replace with your existing key pair name
   tags = {
     Name = "Jenkinsserver"
   }
@@ -33,7 +33,7 @@ resource "aws_instance" "jenkins-server" {
 resource "aws_instance" "sonar-server" {
   ami                    = "ami-0f5ee92e2d63afc18" # Replace with the desired Amazon AMI ID
   instance_type          = "t2.medium"
-  key_name               = "newone.pem" # Replace with your existing key pair name
+  key_name               = "newone" # Replace with your existing key pair name
   tags = {
     Name = "sonarserver"
   }
@@ -165,7 +165,7 @@ resource "aws_instance" "sonar-server" {
 resource "aws_instance" "nexus-server" {
   ami                    = "ami-0f5ee92e2d63afc18" # Replace with the desired Amazon Linux AMI ID
   instance_type          = "t2.medium"
-  key_name               = "newone.pem" # Replace with your existing key pair name
+  key_name               = "newone" # Replace with your existing key pair name
   tags = {
     Name = "nexusserver"
   }
@@ -185,4 +185,26 @@ resource "aws_instance" "nexus-server" {
     cd /opt/nexus*/bin    
     ./nexus start
   EOF 
+}
+resource "aws_instance" "tomcat_instance" {
+  ami           = "ami-0f5ee92e2d63afc18"  
+  instance_type = "t2.medium"
+  key_name      = "newone"  # Replace with your existing key pair name
+
+  # User data script to install and configure Tomcat
+  user_data = <<-EOF
+    #!/bin/bash
+    # Update packages
+    yum update -y
+
+    # Install Java
+    yum install -y java-1.8.0-openjdk
+
+    # Download and extract Tomcat
+    curl -O https://downloads.apache.org/tomcat/tomcat-9/v9.0.52/bin/apache-tomcat-9.0.52.tar.gz
+    tar -zxvf apache-tomcat-9.0.52.tar.gz
+
+    # Start Tomcat
+    ./apache-tomcat-9.0.52/bin/startup.sh
+  EOF
 }
