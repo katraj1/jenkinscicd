@@ -7,6 +7,7 @@
 
 # Technologies 
 - Github, Github webhook
+- Terraform
 - Jenkins pipeline , Declarative script
 - Maven
 - SonarQube
