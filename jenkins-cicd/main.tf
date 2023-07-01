@@ -2,7 +2,7 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-# Create EC2 instances
+# Create EC2 instances for Jenkins --------
 resource "aws_instance" "jenkins-server" {
   ami                    = "ami-057752b3f1d6c4d6c" # Replace with the desired Amazon Linux AMI ID
   instance_type          = "t2.medium"
@@ -56,8 +56,6 @@ resource "aws_instance" "sonar-server" {
     sudo apt-get update -y
     sudo apt-get install openjdk-11-jdk -y
     sudo update-alternatives --config java
-
-    java -version
 
     sudo apt update
     wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
@@ -124,6 +122,7 @@ resource "aws_instance" "sonar-server" {
     systemctl enable sonarqube.service
     #systemctl start sonarqube.service
     #systemctl status -l sonarqube.service
+
     apt-get install nginx -y
     rm -rf /etc/nginx/sites-enabled/default
     rm -rf /etc/nginx/sites-available/default
